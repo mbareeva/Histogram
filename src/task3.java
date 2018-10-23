@@ -6,11 +6,12 @@ import java.io.PrintWriter;
 
 public class task3 {
 	static String s = "C:\\Users\\beeem\\Desktop\\text.txt";
+	static String corpora = "C:\\Users\\beeem\\Desktop\\Corpora\\eng_news_2015_10K\\eng_news_2015_10K-sentences.txt";
 	
 	
 	public static void main(String[] args) {
 		//readCharsFromFile(s);
-		createFile(s);
+		//createFile(corpora);
 		
 	}
 
@@ -22,7 +23,7 @@ public class task3 {
 		int [] count = new int[26];		
 		 try {
 			FileReader fr = new FileReader(new File(s));
-			FileWriter fw = new FileWriter(new File("frequency.txt"));
+			FileWriter fw = new FileWriter(new File("frequency1.txt"));
 			PrintWriter pw = new PrintWriter(fw);
 			int currentChar;
 			while((currentChar = fr.read()) != -1) {
@@ -37,6 +38,7 @@ public class task3 {
 				pw.print("\n");
 				pw.printf("%c =  %d\r", i + 'A', count[i]);
 				
+				
 			}
 				fr.close();
 				pw.close();
@@ -45,6 +47,37 @@ public class task3 {
 		 catch(IOException e) {
 			 System.out.println("Error while reading/writing from file!");
 		 }
+	}
+	
+	public static void outputHistogram(String s) {
+		
+			int [] count = new int[26];		
+			 try {
+				FileReader fr = new FileReader(new File(s));
+				FileWriter fw = new FileWriter(new File("frequency2.txt"));
+				PrintWriter pw = new PrintWriter(fw);
+				int currentChar;
+				while((currentChar = fr.read()) != -1) {
+					char ch = ((char) currentChar);
+					ch = Character.toLowerCase(ch);
+					if (ch >= 'a' && ch <= 'z') {
+					      count[ch - 'a']++;
+					      }
+				}
+				pw.println("The chars frequency is: " + "\n");
+				for(int i = 0; i < 26; i++) {
+					pw.print("\n");
+					pw.printf("%c =  %d\r", i + 'A', count[i]);
+					
+					
+				}
+					fr.close();
+					pw.close();
+					
+			}
+			 catch(IOException e) {
+				 System.out.println("Error while reading/writing from file!");
+			 }
 	}
 	
 
